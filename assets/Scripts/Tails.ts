@@ -56,6 +56,7 @@ export default class TailsComponent extends cc.Component {
     start () {
         for(let tail of this.node.children) {
             tail.on(cc.Node.EventType.MOUSE_DOWN, this.clickTail, this)
+            tail.on(cc.Node.EventType.TOUCH_END, this.clickTail, this)
         }
         cc.game.on('clickBomb', data=> {
             this.isBombClicked = data;
@@ -288,6 +289,7 @@ export default class TailsComponent extends cc.Component {
                     const icon = newNode.addComponent(cc.Sprite)
                     icon.spriteFrame = tailColorVariant
                     newNode.on(cc.Node.EventType.MOUSE_DOWN, this.clickTail, this)
+                    newNode.on(cc.Node.EventType.TOUCH_END, this.clickTail, this)
 
                     cc.tween(newNode).by(0.3, { y: 0 - 58*count}, { easing: 'sineIn' }).start();
                     

@@ -22,11 +22,15 @@ export default class BoosterComponents extends cc.Component {
     start () {
         this.node.getChildByName('BombsContainer').on(cc.Node.EventType.MOUSE_DOWN, this.clickBomb, this)
         this.node.getChildByName('MashContainer').on(cc.Node.EventType.MOUSE_DOWN, this.clickMash, this)
+        this.node.getChildByName('BombsContainer').on(cc.Node.EventType.TOUCH_END, this.clickBomb, this)
+        this.node.getChildByName('MashContainer').on(cc.Node.EventType.TOUCH_END, this.clickMash, this)
         cc.game.on('lockOrUnlockBomb', data=>{
             if(data){
                this.node.getChildByName('BombsContainer').off(cc.Node.EventType.MOUSE_DOWN, this.clickBomb, this) 
+               this.node.getChildByName('BombsContainer').off(cc.Node.EventType.TOUCH_END, this.clickBomb, this) 
             } else {
                 this.node.getChildByName('BombsContainer').on(cc.Node.EventType.MOUSE_DOWN, this.clickBomb, this)
+                this.node.getChildByName('BombsContainer').on(cc.Node.EventType.TOUCH_END, this.clickBomb, this)
             }
         })
         cc.game.on('decrementBombs', data => {
